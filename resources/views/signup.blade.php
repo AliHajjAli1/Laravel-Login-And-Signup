@@ -79,9 +79,10 @@
         @endif
         <form method="POST" action="{{ route('signup') }}">
             @csrf
+            <input type="text" name="name" placeholder="Full name" class="signupinput" required/>
             <input type="email" name="email" placeholder="Email" class="signupinput" value="{{ old('email') }}" required/>
-            <input type="password" name="password" placeholder="Password" class="passwordinput" required/>
-            <input type="password" name="password_confirmation" placeholder="Confirm Password" class="passwordinput" required/>
+            <input type="password" name="password" placeholder="Password" class="signupinput" required/>
+            <input type="password" name="password_confirmation" placeholder="Confirm Password" class="signupinput" required/>
             <button type="submit" class="signupbutton">Sign Up</button>
         </form>
         <label class="alreadyhave">Already have an account? <a class="gotologin" href="{{ route('login.form') }}">Login</a></label>

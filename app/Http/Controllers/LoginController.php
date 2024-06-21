@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -14,22 +15,19 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6',
+        $credentials = $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
         ]);
-
-        $email = $request->input('email');
-        $password = $request->input('password');
-
-        $users = session()->get('users', []);
-
-        foreach ($users as $user) {
-            if ($user['email'] === $email && Hash::check($password, $user['password'])) {
-                return redirect()->route('home')->with('success', 'Login successful!');
-            }
+    
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+    
+            return redirect()->intended('home');
         }
-
-        return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
+    
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 }
