@@ -22,11 +22,14 @@ class LoginController extends Controller
     
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-    
+            
+            $user = Auth::user();
+
+            if (Auth::check()&&$user->hasRole('admin')) {
+                return redirect()->route('admin');
+            }
+
             return redirect()->intended('home');
-        }
-        elseif($request->email ==="alihjali2004@gmail.com" && $request->password==="AliHaj254"){
-            return redirect()->route('admin');
         }
     
         return back()->withErrors([
