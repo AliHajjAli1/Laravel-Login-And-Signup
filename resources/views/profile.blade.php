@@ -11,7 +11,8 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: white;
+            background: url('{{ asset('images/whiteandredbg.png') }}') no-repeat center center;
+            background-size: cover;
         }
         .container {
             text-align: center;
@@ -68,7 +69,7 @@
                     </ul>
                 </div>
             @endif
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('profile') }}">
                 @csrf
                 <input type="text" name="name" placeholder="Name" class="logininput" value="{{ old('name') }}"/>
                 <input type="text" name="phone" placeholder="Phone" class="logininput" value="{{ old('phone') }}"/>

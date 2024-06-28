@@ -11,7 +11,8 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: white;
+            background: url('{{ asset('images/whiteandredbg.png') }}') no-repeat center center;
+            background-size: cover;
         }
         .container {
             text-align: center;
@@ -42,7 +43,7 @@
             width: 100%;
             height: 2rem/* 16px */;
         }
-        .loginbutton {
+        .loginform button {
             border-radius: 1rem;
             background-color: rgb(220, 38, 38);
             color: white;
@@ -52,6 +53,9 @@
             height: 2rem;
             display: block;
             cursor: pointer;
+        }
+        .loginform button:hover{
+            background-color: rgb(180, 30, 30);
         }
         .donthave {
             color: rgb(220, 38, 38);
@@ -77,11 +81,11 @@
                     </ul>
                 </div>
             @endif
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" class="loginform" action="{{ route('login') }}">
                 @csrf
                 <input type="email" name="email" placeholder="Email" class="logininput" value="{{ old('email') }}" required/>
                 <input type="password" name="password" placeholder="Password" class="passwordinput" required/>
-                <button type="submit" class="loginbutton">Login</button>
+                <button type="submit">Login</button>
             </form>
             <label class="donthave">Don't have an account? <a class="gotosignup" href="{{ route('signup.form') }}">Sign Up</a></label>
         </div>

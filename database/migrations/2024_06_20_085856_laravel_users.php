@@ -15,6 +15,8 @@ return new class extends Migration
             $table->string('name')->default('unknown')->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('phone')->unique();
+            $table->string('address');
         });
     }
 
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('laravelusers');
     }
 };

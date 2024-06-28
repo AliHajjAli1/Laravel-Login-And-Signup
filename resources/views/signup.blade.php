@@ -11,7 +11,8 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: white;
+            background: url('{{ asset('images/whiteandredbg.png') }}') no-repeat center center;
+            background-size: cover;
         }
         .container {
             text-align: center;
@@ -42,7 +43,7 @@
             width: 100%;
             height: 2rem/* 16px */;
         }
-        .signupbutton {
+        .signupform button {
             border-radius: 1rem;
             background-color: rgb(220, 38, 38);
             color: white;
@@ -52,6 +53,9 @@
             height: 2rem;
             display: block;
             cursor: pointer;
+        }
+        .signupform button:hover{
+            background-color: rgb(180, 30, 30);
         }
         .alreadyhave {
             color: rgb(220, 38, 38);
@@ -77,7 +81,7 @@
                 </ul>
             </div>
         @endif
-        <form method="POST" action="{{ route('signup') }}">
+        <form method="POST" class="signupform" action="{{ route('signup') }}">
             @csrf
             <input type="text" name="name" placeholder="Full name" class="signupinput" required/>
             <input type="email" name="email" placeholder="Email" class="signupinput" value="{{ old('email') }}" required/>
