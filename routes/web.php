@@ -5,10 +5,12 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Middleware\CheckName;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/signup', function () {
     return view('signup');
 })->middleware(CheckName::class);
+
 
 Route::get('/home', [ProfileController::class, 'showProfileForm'])->name('profile.form');
 Route::post('/home', [ProfileController::class, 'addInfo'])->name('profile');
@@ -16,6 +18,19 @@ Route::post('/home', [ProfileController::class, 'addInfo'])->name('profile');
 
 Route::get('/signup', [SignupController::class, 'showSignupForm'])->name('signup.form');
 Route::post('/signup', [SignupController::class, 'signup'])->name('signup');
+Route::get('/email/verify', function () {
+    return view('emailverification');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/resend', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('status', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
 
 
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login.form');

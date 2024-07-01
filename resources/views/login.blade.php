@@ -83,7 +83,7 @@
             @endif
             <form method="POST" class="loginform" action="{{ route('login') }}">
                 @csrf
-                <input type="email" name="email" placeholder="Email" class="logininput" value="{{ old('email') }}" required/>
+                <input type="email" name="email" placeholder="Email" class="logininput" required/>
                 <input type="password" name="password" placeholder="Password" class="passwordinput" required/>
                 <button type="submit">Login</button>
             </form>

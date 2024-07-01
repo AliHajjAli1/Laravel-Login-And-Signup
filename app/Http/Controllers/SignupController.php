@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 
 class SignupController extends Controller{
 
@@ -24,7 +25,9 @@ class SignupController extends Controller{
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        event(new Registered($user));
     
-        return redirect()->route('login.form');
+        return redirect()->route('login.form')->with('status', 'Please check your email for a verification link.');
     }
 }
