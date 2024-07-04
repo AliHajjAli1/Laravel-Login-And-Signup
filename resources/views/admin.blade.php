@@ -51,6 +51,7 @@
 <body>
     <label class="title">Users List, Total: {{ $userCount }}</label>
     <table>
+    @csrf
         <thead>
             <tr>
                 <th>Email</th>
@@ -74,5 +75,10 @@
             @endforeach
         </tbody>
     </table>
+    <form class="delete-form" action="{{ action('App\Http\Controllers\AdminController@gotoSellings') }}" method="POST">
+        @csrf
+        @method('POST')
+        <button type="submit">Go to Dashboard</button>
+    </form>
 </body>
 </html>

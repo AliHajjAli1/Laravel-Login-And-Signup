@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 
 class SignupController extends Controller{
 
@@ -20,14 +19,13 @@ class SignupController extends Controller{
             'password' => 'required|string|min:8|confirmed',
         ]);
     
-        $user = User::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'role'=>strtolower(trim($request->email)) === strtolower("alihjali2004@gmail.com") ? "admin" : "client",
             'password' => Hash::make($request->password),
         ]);
-
-        event(new Registered($user));
     
-        return redirect()->route('login.form')->with('status', 'Please check your email for a verification link.');
+        return redirect()->route('login.form')->with('status', 'Done!');
     }
 }

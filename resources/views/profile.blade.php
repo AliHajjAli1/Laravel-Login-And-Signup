@@ -71,9 +71,9 @@
             @endif
             <form method="POST" action="{{ route('profile') }}">
                 @csrf
-                <input type="text" name="name" placeholder="Name" class="logininput" value="{{ old('name') }}"/>
-                <input type="text" name="phone" placeholder="Phone" class="logininput" value="{{ old('phone') }}"/>
-                <input type="text" name="address" placeholder="Address" class="logininput" value="{{ old('address') }}"/>
+                <input type="text" name="name" placeholder="Name" class="logininput"/>
+                <input type="text" name="phone" placeholder="Phone" class="logininput"/>
+                <input type="text" name="address" placeholder="Address" class="logininput"/>
                 <button type="submit" class="loginbutton">Done</button>
             </form>
         </div>

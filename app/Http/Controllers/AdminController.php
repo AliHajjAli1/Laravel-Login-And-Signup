@@ -27,4 +27,7 @@ class AdminController extends Controller{
         $userCount = DB::table('users')->count();
         return $userCount;
     }
+    public function gotoSellings(){
+        return redirect("/dashboard");
+    }
 }

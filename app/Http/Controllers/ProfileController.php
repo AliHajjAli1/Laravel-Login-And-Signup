@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 
 class ProfileController extends Controller{
 
@@ -20,13 +19,10 @@ class ProfileController extends Controller{
         $user=auth()->user();
 
         $user->update([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'address' => $request->address,
+            'name' => $request->input('name'),
+            'phone' => $request->input('phone'),
+            'address' => $request->input('address')
         ]);
-        return response()->json([
-            'message' => 'User information updated successfully',
-            'user' => $user
-        ]);
+        return redirect('/dashboard')->withErrors("Info Updated Successfully!");
     }
 }
