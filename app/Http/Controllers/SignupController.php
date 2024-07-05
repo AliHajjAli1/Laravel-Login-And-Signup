@@ -22,10 +22,21 @@ class SignupController extends Controller{
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'role'=>strtolower(trim($request->email)) === strtolower("alihjali2004@gmail.com") ? "admin" : "client",
+            'role'=> $this->assignRoles($request),
             'password' => Hash::make($request->password),
         ]);
     
         return redirect()->route('login.form')->with('status', 'Done!');
+    }
+    public function assignRoles(Request $request){
+        if($request->email === "alihjali2004@gmail.com"){
+            return "admin";
+        }
+        elseif($request->email === "aliemployee1@gmail.com"){
+            return "employee";
+        }
+        else{
+            return "client";
+        }
     }
 }

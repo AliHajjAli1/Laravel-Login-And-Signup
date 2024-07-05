@@ -57,7 +57,7 @@
                     {{ session('bought') ? 'Done' : 'Buy X verification for 4.99$ !!!' }}
                 </button>
             </form>
-        @elseif(Auth::user()->role === 'admin')
+        @elseif(Auth::user()->role === 'admin' || Auth::user()->role === 'employee')
             <form method="GET" action="{{ route('viewSellings') }}">
                 <button type="submit" class="buybutton">
                     View sellings
@@ -65,7 +65,7 @@
             </form>
         @endif
 
-        @if(Auth::user()->role === 'admin' && isset($sellings))
+        @if((Auth::user()->role === 'admin' || Auth::user()->role === 'employee') && isset($sellings) )
             <table>
                 <thead>
                     <tr>
