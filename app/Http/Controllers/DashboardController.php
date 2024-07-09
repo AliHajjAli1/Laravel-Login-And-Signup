@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Promo;
 
 class DashboardController extends Controller
 {
@@ -36,7 +37,6 @@ class DashboardController extends Controller
     }
 
     public function viewSellings(){
-        
         $sellings = User::whereNotNull('bought')->get();
         $totalSellings = $sellings->count();
         $profit = $totalSellings * 4.99;
@@ -44,8 +44,9 @@ class DashboardController extends Controller
     }
     public function applyPromo(Request $request)
     {
-        $promoCode = $request->input('promo_code');
-        if ($promoCode === 'ALI') {
+        $promoCode = Promo::whereNotNull('promo')->get();
+        $writtenpromoCode = $request->input('promo_code');
+        if ($writtenpromoCode === $promoCode) {
             session(['price' => 2.99]);
         } else {
             session(['price' => 4.99]);

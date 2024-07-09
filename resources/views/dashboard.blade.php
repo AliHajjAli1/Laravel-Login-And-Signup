@@ -62,16 +62,16 @@
 <body>
     <div class="container">
         <img src="images/twitter_tick.png"/>
-        <form method="POST" action="{{ route('promo') }}">
-            @csrf
-            <input type="text" placeholder="Promo Code" name="promo_code" class="promo"/>
-            <button type="submit" class="done">Done</button>
-        </form>
         @if(Auth::user()->role === 'client')
+            <form method="POST" action="{{ route('promo') }}">
+                @csrf
+                <input type="text" placeholder="Promo Code" name="promo_code" class="promo"/>
+                <button type="submit" class="done">Done</button>
+            </form>
             <form method="POST" action="{{ route('buy') }}">
                 @csrf
                 <button type="submit" class="buybutton">
-                    {{ session('price', 4.99) == 2.99 ? 'Buy X verification for 2.99$ !!!' : 'Buy X verification for 4.99$ !!!' }}
+                    {{ session('price', 4.99) == 2.99 ? 'Buy X standard verification for 2.99$ !!!' : 'Buy X standard verification for 4.99$ !!!' }}
                 </button>
             </form>
         @elseif(Auth::user()->role === 'admin' || Auth::user()->role === 'employee')

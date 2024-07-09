@@ -46,6 +46,19 @@
         .delete-form button:hover {
             background-color: rgb(180, 30, 30);
         }
+        .promo {
+            border-width: 1px;
+            --tw-border-opacity: 1;
+            border-color: rgb(252 165 165 / var(--tw-border-opacity));
+            border-radius: 1rem; /* 16px */
+        }
+        .done {
+            border-radius: 1rem;
+            background-color: rgb(220, 38, 38);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -79,6 +92,11 @@
         @csrf
         @method('POST')
         <button type="submit">Go to Dashboard</button>
+    </form>
+    <form method="POST" action="{{ action('App\Http\Controllers\AdminController@addPromo') }}" method="Post">
+        @csrf
+        <input type="text" placeholder="Add Promo Code" name="new_promo_code" class="promo"/>
+        <button type="submit" class="done">Done</button>
     </form>
 </body>
 </html>
