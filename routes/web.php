@@ -25,8 +25,8 @@ Route::post('/', [LoginController::class, 'login'])->name('login');
 
 Route::get('/admin', [AdminController::class, 'showAdminForm'])->name('admin');
 Route::delete('/admin/users/{id}', 'App\Http\Controllers\AdminController@deleteUser')->name('admin.deleteUser');
-Route::post('/admin','App\Http\Controllers\AdminController@gotoSellings')->name('admin.gotoSellings');
-Route::post('/admin','App\Http\Controllers\AdminController@addPromo')->name('admin.addPromo');
+Route::post('/admin/goto-sellings', [AdminController::class, 'gotoSellings'])->name('admin.gotoSellings');
+Route::post('/admin/add-promo', [AdminController::class, 'addPromo'])->name('admin.addPromo');
 
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
 Route::post('/buy', [DashboardController::class, 'buy'])->name('buy');

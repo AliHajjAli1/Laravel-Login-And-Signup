@@ -41,5 +41,6 @@ class AdminController extends Controller{
             'promo'=> $promo,
             'isValid'=>true,
         ]);
+        return redirect()->route('admin')->with('success', 'Promo added successfully');
     }
 }

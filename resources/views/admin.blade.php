@@ -51,6 +51,7 @@
             --tw-border-opacity: 1;
             border-color: rgb(252 165 165 / var(--tw-border-opacity));
             border-radius: 1rem; /* 16px */
+            margin-top: 10px;
         }
         .done {
             border-radius: 1rem;
@@ -58,6 +59,12 @@
             color: white;
             border: none;
             cursor: pointer;
+            margin-top: 10px;
+        }
+        .alert-success {
+            color: green;
+            font-weight: bold;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -97,6 +104,11 @@
         @csrf
         <input type="text" placeholder="Add Promo Code" name="new_promo_code" class="promo"/>
         <button type="submit" class="done">Done</button>
+        @if(session('success'))
+        <div class="alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     </form>
 </body>
 </html>
