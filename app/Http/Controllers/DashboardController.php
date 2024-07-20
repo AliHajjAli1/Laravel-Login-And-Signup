@@ -43,15 +43,19 @@ class DashboardController extends Controller
         return view('dashboard', compact('sellings', 'totalSellings','profit'));
     }
     public function applyPromo(Request $request)
-    {
-        $promoCode = Promo::whereNotNull('promo')->get();
-        $writtenpromoCode = $request->input('promo_code');
-        if ($writtenpromoCode === $promoCode) {
-            session(['price' => 2.99]);
-        } else {
-            session(['price' => 4.99]);
-        }
+{
+    $writtenPromoCode = $request->input('promo_code');
+    $promo = Promo::where('promo', $writtenPromoCode)->where('isValid', true)->first();
 
-        return redirect()->route('dashboard');
+    if ($promo) {
+        session(['price' => 2.99]);
+        session()->flash('success', 'Promo code applied successfully!');
+    } else {
+        session(['price' => 4.99]);
+        session()->flash('error', 'Invalid promo code!');
     }
+
+    return redirect()->route('dashboard');
+}
+
 }

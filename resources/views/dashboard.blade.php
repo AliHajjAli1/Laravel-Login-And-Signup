@@ -62,6 +62,19 @@
 <body>
     <div class="container">
         <img src="images/twitter_tick.png"/>
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
         @if(Auth::user()->role === 'client')
             <form method="POST" action="{{ route('promo') }}">
                 @csrf

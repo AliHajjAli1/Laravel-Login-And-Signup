@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('promocodes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->boolean('isValid')->default(true);
+            $table->string('promo');
         });
     }
 
